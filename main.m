@@ -1,30 +1,30 @@
 %% main
-V=17;  %Ѳ���ٶ�
+V=17;  %巡航速度
     Ma=V/340;
 DES=1.225;
 
 wing_a=5;    %unit m
 %wing_c=0,4;  %unit m
 
-
-
+%-----GITHUB测试
 
 %----------------------------------
-m=12;  %���� kg
 %----------------------------------
-
+m=12;  %重量 kg
+%----------------------------------
+%----------------------------------
 
 %E67
-CL_ALP_AIRFOIL=6.4;  %E67��������б��
+CL_ALP_AIRFOIL=6.4;  %E67的升力线斜率
 
 
-AR=18;  %չ�ұ�
-lmd=0.3;%���ұ�
-AA=-5*(180/pi);   %���ӽ�
+AR=18;  %展弦比
+lmd=0.3;%根梢比
+AA=-5*(180/pi);   %后掠角
 
 
-body_b=0.4;%���ֵ�����غɵ���ʽ��Ϊѡȡ
-body_d=2.5;%���ֵ�����غɵ���ʽ��Ϊѡȡ
+body_b=0.4;%这个值根据载荷的形式人为选取
+body_d=2.5;%这个值根据载荷的形式人为选取
 %% areodynamics
 CL_MAX=1.6;
 
@@ -41,10 +41,10 @@ S=m*9.8/(CL_ALPHA*(3*(180/pi))*0.5*DES*V*V);
 wing_c=S/wing_a;
 AR=wing_a/wing_c;
 
-%����װ��
+%增升装置
 V_min=sqrt(m*9.8/(0.9*CL_MAX*0.5*DES*S));
 
-%����
+%阻力
 
 Re1=(DES*V*wing_c)/18.239;
 Re2=(DES*V*body_d)/18.239;
@@ -65,13 +65,13 @@ C_DI=((0.38*CL^2)/(AR-0.8*CL*(AR-1)));
 CD=C_D0+C_DI;
 D=CD*S*0.5*DES*V^2;
 
-tt=0.1; %����ƽ�����
-C_root=2*S/(wing_a*(1+lmd));%  �����ҳ�
+tt=0.1; %翼型平均厚度
+C_root=2*S/(wing_a*(1+lmd));%  翼根弦长
 CC=C_root*0.4;
-t=tt*C_root;    %���ߵ�����
-t_wood_1=0.01;  %���������
-t_wood_2=0.005; %���������
-t_surface=0.002;%��Ƥ���
+t=tt*C_root;    %单边的梁高
+t_wood_1=0.01;  %主翼梁厚度
+t_wood_2=0.005; %辅翼梁厚度
+t_surface=0.002;%蒙皮厚度
 I_1=(t_wood_1*t^3)/12;
 I_2=(t_wood_2*t^3)/12;
 I_3=(t_wood_3^3*CC)/12+t_wood_3*CC*(t/2)^2;
